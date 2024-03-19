@@ -1,0 +1,35 @@
+ul {
+  margin: 0px;
+  list-style: none;
+}
+
+.navbar {
+  background-color: rgb(20, 38, 54);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  min-height: 90px;
+}
+.navMenu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 60px;
+  background-color: rgb(20, 38, 54);
+  line-height: 40px;
+}
+.navLink {
+  text-decoration: none;
+  color: white;
+}
+.activeLink{
+  text-decoration: none;
+  color: red;
+}
+
+.active{
+  text-decoration: none;
+  color:yellow
+}
