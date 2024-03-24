@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import DynamicTable from './DynamicTable';
 
-function SpecificationDetails() {
-  const [specifications, setSpecifications] = useState([{ name: '', units: '', value: '' }]);
+function SpecificationDetails({product}) {
+  const [specifications, setSpecifications] = useState([
+    [{ value: '', type: 'input' },
+    { value: '', type: 'input' },
+    { value: "", type: 'input' }]
+  ]);
   const [selectedRows, setSelectedRows] = useState([]);
 
   const handleAddSpecification = () => {
-    setSpecifications([...specifications, { name: '', units: '', value: '' }]);
+    setSpecifications([...specifications, [{ value: '', type: 'input' },
+    { value: '', type: 'input' },
+    { value: "", type: 'input' }]]);
   };
 
   const handleDeleteRow = (index) => {
@@ -17,21 +23,30 @@ function SpecificationDetails() {
   };
 
   const handleSave = () => {
-    console.log('Saving data...');
+    product.specifications=specifications;
+    
+    console.log('Saving data...', product);
+  }
+  const handleInputChange = (event, rowIndex, cellIndex) => {
+    // console.log(event.target.value)
+    const updatedSpecifications = [...specifications];
+    updatedSpecifications[rowIndex][cellIndex].value = event.target.value; // Update the 'value' property
+    setSpecifications(updatedSpecifications);
   };
-
   return (
     <div>
       <DynamicTable
         className="dynamic-table"
-        headers={['Name', 'Units', 'Value']}
-        data={specifications.map(spec => [spec.name, spec.units, spec.value])}
+        headers={['col1', 'col2', 'col3']}
+        data={specifications}
         selectedRows={selectedRows}
         onRowSelection={(index) => setSelectedRows([index])}
         onDeleteRow={handleDeleteRow}
+        onInputChange={handleInputChange}
       />
       <button onClick={handleAddSpecification}>Add Specification</button>
       <button onClick={handleSave}>Save</button>
+      <button onClick={handleDeleteRow}>delete</button>
     </div>
   );
 }

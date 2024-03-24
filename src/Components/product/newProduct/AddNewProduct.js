@@ -16,14 +16,14 @@ function AddNewProduct({}) {
   };
 
   const handleSave = () => {
-    console.log('Saving data...');
+    console.log('Saving data...',productName,fileLocation);
     setForm('productAdded'); // Set the form state to 'productAdded' to display ProductDetails
   };
 
   return (
     <div aria-label="Product Form" className={styles.form}>
       {form === 'productAdded' ? (
-        <ProductDetails/>
+        <ProductDetails productName={productName} fileLocation={fileLocation} />
       ) : (
         <form>
           <div className={styles.tableContainer}>
