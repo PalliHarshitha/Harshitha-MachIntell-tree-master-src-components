@@ -24,9 +24,9 @@ function SpecificationDetails({product}) {
   };
 
   const handleSave = () => {
-    product.specifications=specifications;
+    // product.specifications=specifications;
     
-    console.log('Saving data...', product);
+    console.log(product);
   }
   const handleInputChange = (event, rowIndex, cellIndex) => {
     // console.log(event.target.value)
@@ -37,23 +37,19 @@ function SpecificationDetails({product}) {
   return (
     <div>
       <DynamicTable
-<<<<<<< Updated upstream
         className="dynamic-table"
         headers={['col1', 'col2', 'col3']}
         data={specifications}
-=======
-        className={styles.dynamicTable}
-        headers={['Name', 'Units', 'Value']}
-        data={specifications.map(spec => [spec.name, spec.units, spec.value])}
->>>>>>> Stashed changes
         selectedRows={selectedRows}
         onRowSelection={(index) => setSelectedRows([index])}
         onDeleteRow={handleDeleteRow}
         onInputChange={handleInputChange}
       />
-      <button onClick={handleAddSpecification}>Add Specification</button>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={handleDeleteRow}>delete</button>
+      <div className={styles.buttonGroup}>
+        <div><button className={styles.btn2} onClick={handleAddSpecification}>Add Specification</button></div>
+        <div><button className={styles.btn2} onClick={handleSave}>Save</button></div>
+        <div><button className={styles.btn2} onClick={handleDeleteRow}>delete</button></div>
+      </div>
     </div>
   );
 }

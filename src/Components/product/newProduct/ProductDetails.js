@@ -8,11 +8,12 @@ function ProductDetails({ productName, fileLocation }) {
     productName: productName,
     fileLocation: fileLocation,
     mainFunction:'',
-    secondaryFunction:[],
+    secondaryFunction:[], specifications:[],
   });
   const [secondaryFunctions, setSecondaryFunctions] = useState([""]); // State to store secondary functions
   const [selectedRows, setSelectedRows] = useState([]); // State to store selected row indices
   const [form, setForm] = useState("");
+  
 
   const handleMainFunctionChange = (event) => {
     setMainFunction(event.target.value);
@@ -65,7 +66,7 @@ function ProductDetails({ productName, fileLocation }) {
   return (
     <div aria-label="productAdded" className={styles.form}>
       {form === "specifications" ? (
-        <SpecificationDetails product={product} />
+        <SpecificationDetails productName={productName} fileLocation={fileLocation} />
       ) : (
         <div>
           <table className={styles.table}>
@@ -81,7 +82,7 @@ function ProductDetails({ productName, fileLocation }) {
               <tr>
                 <th className={styles.th}>Main Functions</th>
                 <td className={styles.td}>
-                  <textarea
+                  <textarea className={styles.input}
                     value={mainFunction}
                     onChange={handleMainFunctionChange}
                   />
@@ -106,7 +107,7 @@ function ProductDetails({ productName, fileLocation }) {
                 >
                   <th className={styles.th}>Secondary function {index + 1}</th>
                   <td className={styles.th}>
-                    <input
+                    <input className={styles.input}
                       type="text"
                       value={secondaryFunction}
                       onChange={(event) =>

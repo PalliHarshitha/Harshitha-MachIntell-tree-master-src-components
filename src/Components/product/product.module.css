@@ -5,8 +5,6 @@
 }
 .leftbox {
   display: flex;
-  /* float: left; */
-  /* background: white; */
   flex-direction: column;
   width: 33%;
   height: 170px;
@@ -85,7 +83,7 @@
   /* background: white; */
   width: 75%;
   height: 468px;
-  background: grey;
+  background: white;
   /* border-left:1px solid #00153E; */
   border-right: 1px solid #00153e;
   justify-content: center;
@@ -125,62 +123,28 @@
   padding: 8px;
 }
 
-.btn1{
-  position: absolute;
-  top: 68%;
-  right:22%;
-}
-
 .form{
   display: flex;
   flex-direction: column;
 }
 
 .btn2{
-  align-self: flex-end;
   padding-bottom: 1%;
 }
 
-/* .dynamicTable {
-  border-collapse: collapse;
+/* .buttonGroup{
+  display: flex;
+  justify-content: center;
+} */
+
+.input {
   width: 100%;
-}
-
-.dynamic-table th, .dynamic-table td {
-  border: 2px solid red;
-  text-align: left;
-  padding: 2%;
-}
-
-.dynamic-table th {
-  background-color: #f2f2f2;
-}
- */
-
-
- .table-container1 {
-  border: 1px solid #201f1f;
-  border-collapse: collapse;
-}
-
-.table-header {
-  background-color: #f2f2f2;
-}
-
-.table-header th,
-.table-row td {
-  border: 1px solid #201f1f;
-  padding: 10px;
-}
-
-.table-footer {
-  background-color: #f2f2f2;
-}
-
-.button-container {
-  margin-top: 10px;
-}
-
-.button-container button {
-  margin-right: 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-family: inherit;
+  appearance: none;
 }

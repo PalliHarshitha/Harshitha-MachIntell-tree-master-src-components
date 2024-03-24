@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ProductDetails from './ProductDetails';
 import styles from '../product.module.css';
 
-function AddNewProduct({}) {
+function AddNewProduct() {
   const [productName, setProductName] = useState('');
   const [fileLocation, setFileLocation] = useState('');
   const [form, setForm] = useState('');
@@ -16,7 +16,7 @@ function AddNewProduct({}) {
   };
 
   const handleSave = () => {
-    console.log('Saving data...',productName,fileLocation);
+    console.log('Saving data...', productName, fileLocation);
     setForm('productAdded'); // Set the form state to 'productAdded' to display ProductDetails
   };
 
@@ -33,9 +33,11 @@ function AddNewProduct({}) {
                   <th className={styles.th}>Name of the Product</th>
                   <td className={styles.td}>
                     <input
+                      className={styles.input}
                       type="text"
                       value={productName}
                       onChange={handleProductNameChange}
+                      required // Add the required attribute
                     />
                   </td>
                 </tr>
@@ -45,6 +47,7 @@ function AddNewProduct({}) {
                   <th className={styles.th}>File location</th>
                   <td className={styles.td}>
                     <input
+                      className={styles.input}
                       type="text"
                       value={fileLocation}
                       onChange={handleFileLocationChange}
@@ -53,9 +56,11 @@ function AddNewProduct({}) {
                 </tr>
               </tbody>
             </table>
-            <button type="button" className={styles.btn2} onClick={handleSave}>
-              Save
-            </button>
+            <div className={styles.buttonGroup}>
+              <button type="button" className={styles.btn2} onClick={handleSave}>
+                Save
+              </button>
+            </div>
           </div>
         </form>
       )}
