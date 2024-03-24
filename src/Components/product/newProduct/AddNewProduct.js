@@ -15,67 +15,52 @@ function AddNewProduct({}) {
     setFileLocation(event.target.value);
   };
 
-  const handleBrowse = () => {
-    console.log('Browsing file location...');
-  };
-
   const handleSave = () => {
     console.log('Saving data...');
     setForm('productAdded'); // Set the form state to 'productAdded' to display ProductDetails
   };
 
   return (
-    <div aria-label="Product Form">
+    <div aria-label="Product Form" className={styles.form}>
       {form === 'productAdded' ? (
         <ProductDetails/>
       ) : (
         <form>
-          <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-            <thead>
-              <tr>
-                <th style={code.th}>Name of the Product</th>
-                <td style={code.td}>
-                  <input
-                    type="text"
-                    value={productName}
-                    onChange={handleProductNameChange}
-                  />
-                </td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th style={code.th}>File location</th>
-                <td style={code.td}>
-                  <input
-                    type="text"
-                    value={fileLocation}
-                    onChange={handleFileLocationChange}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <button type="button" className={styles.btn} onClick={handleSave}>
-            Save
-          </button>
+          <div className={styles.tableContainer}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th className={styles.th}>Name of the Product</th>
+                  <td className={styles.td}>
+                    <input
+                      type="text"
+                      value={productName}
+                      onChange={handleProductNameChange}
+                    />
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th className={styles.th}>File location</th>
+                  <td className={styles.td}>
+                    <input
+                      type="text"
+                      value={fileLocation}
+                      onChange={handleFileLocationChange}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="button" className={styles.btn2} onClick={handleSave}>
+              Save
+            </button>
+          </div>
         </form>
       )}
     </div>
   );
 }
-
-const code = {
-  th: {
-    border: '1px solid #dddddd',
-    textAlign: 'left',
-    padding: '8px',
-  },
-  td: {
-    border: '1px solid #dddddd',
-    textAlign: 'left',
-    padding: '8px',
-  },
-};
 
 export default AddNewProduct;
