@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../product.module.css";
 
 function DynamicTable({ headers, data, onInputChange }) {
@@ -6,7 +6,7 @@ function DynamicTable({ headers, data, onInputChange }) {
         // console.log(cell);
         if (cell.type === "input") {
           return (
-            <input
+            <input className={styles.input}
               type="text"
               value={cell.value}
               onChange={(e) => onInputChange(e, rowIndex, cellIndex)}
@@ -18,7 +18,7 @@ function DynamicTable({ headers, data, onInputChange }) {
       };
 
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           {headers.map((header) => (

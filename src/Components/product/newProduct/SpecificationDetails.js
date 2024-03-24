@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DynamicTable from './DynamicTable';
+import styles from '../product.module.css'
 
 function SpecificationDetails({product}) {
   const [specifications, setSpecifications] = useState([
@@ -36,9 +37,15 @@ function SpecificationDetails({product}) {
   return (
     <div>
       <DynamicTable
+<<<<<<< Updated upstream
         className="dynamic-table"
         headers={['col1', 'col2', 'col3']}
         data={specifications}
+=======
+        className={styles.dynamicTable}
+        headers={['Name', 'Units', 'Value']}
+        data={specifications.map(spec => [spec.name, spec.units, spec.value])}
+>>>>>>> Stashed changes
         selectedRows={selectedRows}
         onRowSelection={(index) => setSelectedRows([index])}
         onDeleteRow={handleDeleteRow}
