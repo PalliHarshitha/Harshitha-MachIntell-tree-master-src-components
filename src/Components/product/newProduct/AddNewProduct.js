@@ -6,6 +6,7 @@ function AddNewProduct() {
   const [productName, setProductName] = useState('');
   const [fileLocation, setFileLocation] = useState('');
   const [form, setForm] = useState('');
+  const [error, setError] = useState('');
 
   const handleProductNameChange = (event) => {
     setProductName(event.target.value);
@@ -17,7 +18,35 @@ function AddNewProduct() {
 
   const handleSave = () => {
     console.log('Saving data...', productName, fileLocation);
-    setForm('productAdded'); // Set the form state to 'productAdded' to display ProductDetails
+
+    // Perform validation
+    if (validation()) {
+      setForm('productAdded'); // Set the form state to 'productAdded' to display ProductDetails
+    } else {
+      console.log('Validation failed');
+    }
+  };
+
+  const validation = () => {
+    let isValid = true;
+    let errorMessage = '';
+
+    // Check if productName is empty
+    if (productName.trim() === '') {
+      errorMessage += 'Please enter product name.\n';
+      isValid = false;
+    }
+
+    // Check if fileLocation is empty
+    if (fileLocation.trim() === '') {
+      errorMessage += 'Please enter file location.\n';
+      isValid = false;
+    }
+
+    // Set error message
+    setError(errorMessage);
+
+    return isValid;
   };
 
   return (
@@ -37,7 +66,7 @@ function AddNewProduct() {
                       type="text"
                       value={productName}
                       onChange={handleProductNameChange}
-                      required // Add the required attribute
+                      required
                     />
                   </td>
                 </tr>
@@ -51,6 +80,7 @@ function AddNewProduct() {
                       type="text"
                       value={fileLocation}
                       onChange={handleFileLocationChange}
+                      required
                     />
                   </td>
                 </tr>
@@ -63,6 +93,12 @@ function AddNewProduct() {
             </div>
           </div>
         </form>
+      )}
+
+      {error && (
+        <div className={styles.error}>
+          <pre>{error}</pre>
+        </div>
       )}
     </div>
   );

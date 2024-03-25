@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SpecificationDetails from "./SpecificationDetails";
 import styles from "../product.module.css";
 
 function ProductDetails({ productName, fileLocation }) {
   const [mainFunction, setMainFunction] = useState("");
+  const [error, setError] = useState('');
   const [product, setProduct] = useState({
     productName: productName,
     fileLocation: fileLocation,
@@ -13,7 +14,25 @@ function ProductDetails({ productName, fileLocation }) {
   const [secondaryFunctions, setSecondaryFunctions] = useState([""]); // State to store secondary functions
   const [selectedRows, setSelectedRows] = useState([]); // State to store selected row indices
   const [form, setForm] = useState("");
-  
+  const [productId, setProductId] = useState("");
+  useEffect( () => {
+    generateProductId(productName);
+  }, [productName]);
+
+  const generateProductId = (productName) => {
+    if (productName.length >= 2){
+      const firstTwoChars = productName.substring(0,2).toUpperCase();
+      const date = new Date();
+      const month = ('0' + ((date.getMonth()+1))).slice(-2);
+      const year = date.getFullYear().toString().slice(-2);
+      const specialChars = "!@#$%^&*()_[]{}|";
+      const specialChar = specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+      const orderNumbers = "0123456789";
+      const orderNumber = specialChars.charAt(Math.floor(Math.random() * orderNumbers.length));      
+      const generateProductId = firstTwoChars + month + year + specialChar + orderNumber;
+      setProductId(generateProductId);
+    }
+  }
 
   const handleMainFunctionChange = (event) => {
     setMainFunction(event.target.value);
@@ -28,22 +47,51 @@ function ProductDetails({ productName, fileLocation }) {
     updatedSecondaryFunctions[index] = value;
     setSecondaryFunctions(updatedSecondaryFunctions);
   };
-
+  
   const handleSave = () => {
-    const updatedProduct = {
-      ...product,
-      mainFunction: mainFunction,
-      secondaryFunction: secondaryFunctions,
-    };
-    setProduct(updatedProduct);
-    console.log("Saving data...", product);
-    setForm("specifications");
+    console.log('Saving data...', mainFunction, secondaryFunctions);
+
+    // Perform validation
+    if (validation()) {
+      setForm('specifications'); // Set the form state to 'productAdded' to display ProductDetails
+    } else {
+      console.log('Validation failed');
+    }
   };
 
+  const validation = () => {
+    let isValid = true;
+    let errorMessage = '';
+
+    // Check if mainFunction is empty
+    if (mainFunction.trim() === '') {
+      errorMessage += 'Please enter Main Function.\n';
+      isValid = false;
+    }
+
+    // Check if Secondary Function is empty
+    if (secondaryFunctions.some(sf => sf.trim() === '')) {
+      errorMessage += 'Please enter  all Secondary Functions.\n';
+      isValid = false;
+    }
+
+    // Set error message
+    setError(errorMessage);
+
+    return isValid;
+  };
+
+  
   const handleDelete = () => {
-    const updatedSecondaryFunctions = secondaryFunctions.filter(
-      (_, index) => !selectedRows.includes(index)
-    );
+    let updatedSecondaryFunctions;
+    if (selectedRows.length === 0) {
+      updatedSecondaryFunctions = [...secondaryFunctions];
+      updatedSecondaryFunctions.pop();
+    } else {
+      updatedSecondaryFunctions = secondaryFunctions.filter(
+        (_, index) => !selectedRows.includes(index)
+      );
+    }
     setSecondaryFunctions(updatedSecondaryFunctions);
     setSelectedRows([]);
   };
@@ -77,7 +125,7 @@ function ProductDetails({ productName, fileLocation }) {
               </tr>
               <tr>
                 <th className={styles.th}>Product ID</th>
-                <td className={styles.td}>{fileLocation}</td>
+                <td className={styles.td}>{productId}</td>
               </tr>
               <tr>
                 <th className={styles.th}>Main Functions</th>
@@ -130,6 +178,11 @@ function ProductDetails({ productName, fileLocation }) {
               <button onClick={handleSave}>Save</button>
             </div>
           </div>
+        </div>
+      )}
+      {error && (
+        <div className={styles.error}>
+          <pre>{error}</pre>
         </div>
       )}
     </div>
