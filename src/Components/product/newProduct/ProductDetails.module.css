@@ -1,0 +1,44 @@
+.productForm{
+    display: flex;
+    flex-wrap: column;
+    margin-top: 5%;
+    width: 100%;
+}
+.plusMinus{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30%;
+    align-items: center;
+}
+.table1{
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-right: 0.5%;
+  }
+
+.buttonContainer{
+    float: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn{
+    margin-bottom: 5%;
+}
+
+.Vbtn{
+    margin-top: 90%;
+
+}
+
+.plusMinusAligned {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+.Vbtn{
+    margin-top: 5.5%;
+}

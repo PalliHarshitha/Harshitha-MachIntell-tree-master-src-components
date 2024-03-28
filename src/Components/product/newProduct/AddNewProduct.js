@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProductDetails from './ProductDetails';
-import styles from '../product.module.css';
+import styles from './newProduct.module.css';
 
 function AddNewProduct() {
   const [productName, setProductName] = useState('');

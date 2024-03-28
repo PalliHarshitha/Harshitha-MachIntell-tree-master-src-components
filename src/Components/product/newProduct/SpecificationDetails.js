@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import DynamicTable from './DynamicTable';
-import styles from '../product.module.css'
+import code from './ProductDetails.module.css';
+import styles from './newProduct.module.css';
 
-function SpecificationDetails({product}) {
+function SpecificationDetails({ product }) {
   const [specifications, setSpecifications] = useState([
-    [{ value: '', type: 'input' },
-    { value: '', type: 'input' },
-    { value: "", type: 'input' }]
+    [{ value: '', type: 'input' }, { value: '', type: 'input' }, { value: "", type: 'input' }],
   ]);
   const [selectedRows, setSelectedRows] = useState([]);
-  const [error, seterror] = useState('');
+  const [error, setError] = useState('');
+  const [isSpecificationsTableExpanded, setIsSpecificationsTableExpanded] = useState(true);
+  const [vButtonVisible, setVButtonVisibility] = useState(false);
 
   const handleAddSpecification = () => {
-    setSpecifications([...specifications, [{ value: '', type: 'input' },
-    { value: '', type: 'input' },
-    { value: "", type: 'input' }]]);
+    setSpecifications([...specifications, [{ value: '', type: 'input' }, { value: '', type: 'input' }, { value: "", type: 'input' }]]);
   };
 
   const handleDeleteRow = (index) => {
@@ -30,25 +29,31 @@ function SpecificationDetails({product}) {
 
     if (validation()) {
       console.log('saved');
-    }else{
+      // Hide data rows on save
+      setIsSpecificationsTableExpanded(false); // Only show headers
+      setVButtonVisibility(true);
+    } else {
       console.log('Validation Failed');
     }
-  }
+  };
+
   const validation = () => {
-    let isValid =  true;
+    let isValid = true;
     let errorMessage = '';
 
-    if (specifications.some(row => row.some(sp => sp.value.trim() === ''))){
-      errorMessage+= "Please enter all Specifications.\n";
+    if (specifications.some(row => row.some(sp => sp.value.trim() === ''))) {
+      errorMessage += "Please enter all Specifications.\n";
       isValid = false;
     }
-  
-    seterror(errorMessage)
-  
-    return isValid;
-  }
 
-  
+    setError(errorMessage);
+
+    return isValid;
+  };
+
+  const handleExpandCollapse = () => {
+    setIsSpecificationsTableExpanded(!isSpecificationsTableExpanded);
+  };
 
   const handleInputChange = (event, rowIndex, cellIndex) => {
     // console.log(event.target.value)
@@ -56,21 +61,38 @@ function SpecificationDetails({product}) {
     updatedSpecifications[rowIndex][cellIndex].value = event.target.value; // Update the 'value' property
     setSpecifications(updatedSpecifications);
   };
+
   return (
     <div>
-      <DynamicTable
-        className="dynamic-table"
-        headers={['Name', 'Units', 'Value']}
-        data={specifications}
-        selectedRows={selectedRows}
-        onRowSelection={(index) => setSelectedRows([index])}
-        onDeleteRow={handleDeleteRow}
-        onInputChange={handleInputChange}
-      />
-      <div className={styles.buttonGroup}>
-        <div><button className={styles.btn2} onClick={handleAddSpecification}>Add Specification</button></div>
-        <div><button className={styles.btn2} onClick={handleDeleteRow}>Delete Specification</button></div>
-        <div><button className={styles.btn2} onClick={handleSave}>Save</button></div>
+      <div className={code.productForm}>
+        <div>
+          <DynamicTable
+            className="dynamic-table"
+            headers={['Name', 'Units', 'Value']}
+            isSpecificationsTableExpanded={isSpecificationsTableExpanded} // Control data visibility
+            data={isSpecificationsTableExpanded ? specifications : []} // Only show data if expanded
+            selectedRows={selectedRows}
+            onRowSelection={(index) => setSelectedRows([index])}
+            onDeleteRow={handleDeleteRow}
+            onInputChange={handleInputChange}
+          />
+        </div>
+        {vButtonVisible && (
+          <>
+            <div className={code.Vbtn}>
+              <button className={code.btn} onClick={handleExpandCollapse}>V</button>
+            </div>
+          </>
+        )}
+      </div>
+      <div className={code.buttonContainer}>
+        {isSpecificationsTableExpanded && ( // Only show buttons when table is expanded
+          <>
+            <div><button className={code.btn} onClick={handleAddSpecification}>Add Specification</button></div>
+            <div><button className={code.btn} onClick={handleDeleteRow}>Delete Specification</button></div>
+            <div><button className={code.btn} onClick={handleSave}>Save</button></div>
+          </>
+        )}
       </div>
       {error && (
         <div className={styles.error}>

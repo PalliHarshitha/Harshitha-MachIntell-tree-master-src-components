@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "../product.module.css";
+import code from './ProductDetails.module.css';
+import styles from './newProduct.module.css';
 
 function DynamicTable({ headers, data, onInputChange }) {
     const renderCell = (cell, rowIndex, cellIndex) => {
@@ -18,7 +19,7 @@ function DynamicTable({ headers, data, onInputChange }) {
       };
 
   return (
-    <table className={styles.table}>
+    <table className={code.table1}>
       <thead>
         <tr>
           {headers.map((header) => (
