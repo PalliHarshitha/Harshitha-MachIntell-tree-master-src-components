@@ -66,6 +66,7 @@ function SpecificationDetails({ product }) {
     <div>
       <div className={code.productForm}>
         <div>
+          <h4 style={{ textAlign: 'center' }}>Add specifications</h4>
           <DynamicTable
             className="dynamic-table"
             headers={['Name', 'Units', 'Value']}
@@ -80,16 +81,28 @@ function SpecificationDetails({ product }) {
         {vButtonVisible && (
           <>
             <div className={code.Vbtn}>
-              <button className={code.btn} onClick={handleExpandCollapse}>V</button>
+              <button 
+              className={code.btn} 
+              onClick={handleExpandCollapse}>
+                { isSpecificationsTableExpanded ? '⋀' : '⋁' }
+              </button>
             </div>
           </>
         )}
       </div>
+      { isSpecificationsTableExpanded && (
+        <div className={code.plusMinus}>
+        <div>
+          <button className={code.btn} onClick={handleAddSpecification}>+</button>
+        </div>
+        <div>
+          <button className={code.btn} onClick={handleDeleteRow}>-</button>
+        </div>
+      </div>
+      )}
       <div className={code.buttonContainer}>
         {isSpecificationsTableExpanded && ( // Only show buttons when table is expanded
           <>
-            <div><button className={code.btn} onClick={handleAddSpecification}>Add Specification</button></div>
-            <div><button className={code.btn} onClick={handleDeleteRow}>Delete Specification</button></div>
             <div><button className={code.btn} onClick={handleSave}>Save</button></div>
           </>
         )}

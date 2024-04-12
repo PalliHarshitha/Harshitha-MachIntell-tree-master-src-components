@@ -43,8 +43,16 @@
 .btn {
   align-items: center;
   /* width: 100%; */
-  margin: 3px;
+  margin: 7px;
   padding: 2px;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 1px 2px 3px 0.7px rgba(0, 0, 0, 0.7);
+
+}
+.btn:hover{
+  background-color: aliceblue;
+  border: 2px solid black;
 }
 .col {
   margin: 0%;

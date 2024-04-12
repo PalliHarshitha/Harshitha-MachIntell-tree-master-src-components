@@ -3,21 +3,16 @@
     flex-wrap: column;
     margin-top: 5%;
     width: 100%;
-}
-.plusMinus{
-    display: flex;
-    flex-direction: column;
-    margin-top: 30%;
-    align-items: center;
+    justify-content: center;
 }
 .table1{
     border-collapse: collapse;
+    box-shadow: 1px 2px 3px 0.7px rgba(86, 84, 84, 0.5);
     width: 100%;
     margin-top: 5%;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     margin-right: 0.5%;
   }
-
 .buttonContainer{
     float: right;
     display: flex;
@@ -27,16 +22,30 @@
 
 .btn{
     margin-bottom: 5%;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 2px 3px 0.7px rgba(0,0,0,0.7);
 }
 
-.Vbtn{
-    margin-top: 90%;
-
+.btn.saveBtn,
+.btn.addSpecBtn {
+  border: 1px solid black;
+  margin-bottom: 2%;
 }
 
-.plusMinusAligned {
+.btn:hover{
+    /* background-color: aliceblue; */
+    border: 2px solid  black;
+}
+
+.plusMinus{
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+}
+
+.plusMinus > div {
+    margin-right: 1%;
   }
 
 .Vbtn{
