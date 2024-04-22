@@ -4,7 +4,8 @@ import SubAssembly from "./subAssembly/subAssembly";
 import Components from "./components/components";
 import EditProduct from "./editProduct/editProduct";
 import AddNewProduct from "./newProduct/AddNewProduct";
-import Mainassemblies from "./subAssembly/Mainassemblies";
+import Pagination from "./newProduct/pagination";
+// import Mainassemblies from "./subAssembly/Mainassemblies";
 
 const Product = () => {
     const [form,setForm]=useState("");
@@ -19,8 +20,10 @@ const Product = () => {
         return <SubAssembly/>
         else if(form==="components")
         return <Components/>
-        if(form==="Product Form")
+        else if(form==="Product Form")
         return <AddNewProduct/>
+        else if(form === "pagination")
+        return <Pagination />
     }
 
   return (
@@ -33,6 +36,9 @@ const Product = () => {
             </button>
             <button type="button" className={styles.btn} onClick={()=>{toggleFormDisplay("editProduct")}}>
               Edit product
+            </button>
+            <button type="button" className={styles.btn} onClick={() => {toggleFormDisplay("pagination")}}>
+              Pagination
             </button>
           </div>
           <div className={styles.columnTitle}>Product Details</div>
